@@ -40,3 +40,13 @@ header a {
 .product-info {
   padding: 1rem;
 }
+
+.rating span {
+  color: #ffc000;
+
+}
+
+.btn-primary {
+  background-color: #ffc000;
+  color: black;
+}
