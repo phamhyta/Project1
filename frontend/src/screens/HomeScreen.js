@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
@@ -39,6 +40,9 @@ function HoneScreen() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>HUONGTX</title>
+      </Helmet>
       <h1>Feature Products</h1>
       <div className="products">
         {loading ? (
