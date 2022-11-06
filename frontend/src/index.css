@@ -50,3 +50,11 @@ header a {
   background-color: #ffc000;
   color: black;
 }
+
+.img-large {
+  max-width: 100%;
+}
+
+.img-thumbnail {
+  height: 80px;
+}
