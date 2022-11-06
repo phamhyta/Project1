@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Buttom from '../components/Buttom.js';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,6 +61,13 @@ function HoneScreen() {
             ))}
           </Row>
         )}
+        <div className="py-5 justify-content-between d-flex">
+          <div></div>
+          <div>
+            <Buttom />
+          </div>
+          <div></div>
+        </div>
       </div>
     </div>
   );
