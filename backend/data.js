@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      _id: '1',
+      // _id: '1',
       name: 'Nike Slim shirt 1',
       slug: 'nike-slim-shirt-1',
       category: 'Shirts',
@@ -14,7 +14,7 @@ const data = {
       price: 100,
     },
     {
-      _id: '2',
+      // _id: '2',
       name: 'Nike Slim shirt 2',
       slug: 'nike-slim-shirt-2',
       category: 'Shirts',
@@ -27,7 +27,7 @@ const data = {
       price: 200,
     },
     {
-      _id: '3',
+      // _id: '3',
       name: 'Nike Slim shirt 3',
       slug: 'nike-slim-shirt-3',
       category: 'Shirts',
@@ -40,7 +40,7 @@ const data = {
       price: 300,
     },
     {
-      _id: '4',
+      // _id: '4',
       name: 'Nike Slim shirt 4',
       slug: 'nike-slim-shirt-4',
       category: 'Shirts',
