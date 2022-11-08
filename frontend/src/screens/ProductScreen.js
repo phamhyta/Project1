@@ -89,7 +89,7 @@ function ProductScreen() {
               <Helmet>
                 <title>{product.name}</title>
               </Helmet>
-              <h1>{product.name}</h1>
+              <h2>{product.name}</h2>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating

@@ -34,7 +34,7 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark">
+          <Navbar bg="success" variant="dark">
             <Container>
               <LinkContainer to="/">
                 <Navbar.Brand>HUONGTX</Navbar.Brand>

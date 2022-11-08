@@ -8,6 +8,7 @@ import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Buttom from '../components/Buttom.js';
+import UncontrolledExample from '../components/UncontrolledExample';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,6 +47,7 @@ function HoneScreen() {
       <Helmet>
         <title>HUONGTX</title>
       </Helmet>
+      <UncontrolledExample />
       <h1>Feature Products</h1>
       <div className="products">
         {loading ? (

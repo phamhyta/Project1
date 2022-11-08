@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ export default function CartScreen() {
   const {
     cart: { cartItems },
   } = state;
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
@@ -33,6 +37,7 @@ export default function CartScreen() {
       type: 'CART_REMOVE_ITEM',
       payload: item,
     });
+    handleClose();
   };
 
   const checkoutHandler = () => {
@@ -87,12 +92,29 @@ export default function CartScreen() {
                     </Col>
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
-                      <Button
-                        variant="light"
-                        onClick={() => removeItemHandler(item)}
-                      >
-                        <i className="fas fa-trash"></i>
+                      <Button variant="light" onClick={handleShow}>
+                        Delete
                       </Button>
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Delete product</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          Are you sure you want to remove this product from your
+                          cart?
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button
+                            variant="primary"
+                            onClick={() => removeItemHandler(item)}
+                          >
+                            Delete
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </Col>
                   </Row>
                 </ListGroup.Item>
