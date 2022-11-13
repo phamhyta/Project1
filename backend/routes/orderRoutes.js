@@ -24,6 +24,16 @@ orderRouter.post(
     res.status(201).send({ message: 'New Order Created', order });
   })
 );
+
+orderRouter.get(
+  '/mine',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
+  })
+);
+
 orderRouter.get(
   '/:id',
   isAuth,
@@ -57,4 +67,5 @@ orderRouter.put(
     }
   })
 );
+
 export default orderRouter;
