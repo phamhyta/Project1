@@ -1,3 +1,7 @@
+import React from 'react';
+import 'antd/dist/antd.css';
+import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Tooltip } from 'antd';
 function Rating(props) {
   const { rating, numReviews } = props;
   return (
@@ -56,6 +60,30 @@ function Rating(props) {
               : 'far fa-star'
           }
         />
+      </span>
+      <span className="ml-5">
+        <Avatar.Group
+          maxCount={1}
+          maxPopoverTrigger="click"
+          maxStyle={{
+            color: '#f56a00',
+            backgroundColor: '#fde3cf',
+            cursor: 'pointer',
+          }}
+        >
+          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
+          <Tooltip title="Ant User" placement="top">
+            <Avatar
+              style={{ backgroundColor: '#87d068' }}
+              icon={<UserOutlined />}
+            />
+          </Tooltip>
+          <Avatar
+            style={{ backgroundColor: '#1890ff' }}
+            icon={<AntDesignOutlined />}
+          />
+        </Avatar.Group>
       </span>
       <span> {numReviews} reviews</span>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Buttom from '../components/Buttom.js';
+// import Buttom from '../components/Buttom.js';
 import UncontrolledExample from '../components/UncontrolledExample';
 
 const reducer = (state, action) => {
@@ -65,9 +65,9 @@ function HoneScreen() {
         )}
         <div className="py-5 justify-content-between d-flex">
           <div></div>
-          <div>
+          {/* <div class="mt-5">
             <Buttom />
-          </div>
+          </div> */}
           <div></div>
         </div>
       </div>
