@@ -5,5 +5,25 @@
     "framer-motion": "^7.6.1",
     "framer-motion-3d": "^7.6.1",
     "three": "^0.145.0"
-  }
+  },
+  "name": "project1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamhyta/Project1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamhyta/Project1/issues"
+  },
+  "homepage": "https://github.com/phamhyta/Project1#readme",
+  "description": ""
 }
