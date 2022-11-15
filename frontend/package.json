@@ -1,7 +1,4 @@
 {
-  "name": "frontend",
-  "proxy": "http://localhost:5000",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@paypal/react-paypal-js": "^7.8.1",
@@ -25,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
