@@ -2,7 +2,7 @@ import React from 'react';
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Tooltip } from 'antd';
 function Rating(props) {
-  const { rating, numReviews } = props;
+  const { rating, numReviews, caption } = props;
   return (
     <div className="rating">
       <span>
@@ -84,7 +84,11 @@ function Rating(props) {
           />
         </Avatar.Group>
       </span>
-      <span> {numReviews} reviews</span>
+      {caption ? (
+        <span>{caption}</span>
+      ) : (
+        <span>{' ' + numReviews + ' reviews'}</span>
+      )}
     </div>
   );
 }
