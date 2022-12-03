@@ -60,7 +60,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span className="ml-5">
+      {/* <span className="ml-5">
         <Avatar.Group
           maxCount={1}
           maxPopoverTrigger="click"
@@ -83,7 +83,7 @@ function Rating(props) {
             icon={<AntDesignOutlined />}
           />
         </Avatar.Group>
-      </span>
+      </span> */}
       {caption ? (
         <span>{caption}</span>
       ) : (
