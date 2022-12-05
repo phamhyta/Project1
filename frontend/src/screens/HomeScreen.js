@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import News from '../components/News';
 // import Buttom from '../components/Buttom.js';
 import UncontrolledExample from '../components/UncontrolledExample';
 
@@ -48,7 +49,9 @@ function HoneScreen() {
         <title>HUONGTX</title>
       </Helmet>
       <UncontrolledExample />
-      <h1>Feature Products</h1>
+      <h1 className="text-center border my-4 py-2 text-header">
+        Feature Products
+      </h1>
       <div className="products">
         {loading ? (
           <LoadingBox />
@@ -63,12 +66,18 @@ function HoneScreen() {
             ))}
           </Row>
         )}
-        <div className="py-5 justify-content-between d-flex">
+        <div className="justify-content-between d-flex">
           <div></div>
           {/* <div class="mt-5">
             <Buttom />
           </div> */}
           <div></div>
+        </div>
+        <div className="pb-5">
+          <h1 className="text-center border my-4 py-2 text-header">News</h1>
+          <div>
+            <News />
+          </div>
         </div>
       </div>
     </div>

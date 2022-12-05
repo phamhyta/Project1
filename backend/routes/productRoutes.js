@@ -10,7 +10,7 @@ productRouter.get('/', async (req, res) => {
   res.send(products);
 });
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 5;
 
 productRouter.post(
   '/:id/reviews',

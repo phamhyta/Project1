@@ -24,6 +24,7 @@ import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
+import Footer from './components/Footer';
 import SearchScreen from './screens/SearchScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -84,7 +85,7 @@ function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>HUONGTX</Navbar.Brand>
+                <Navbar.Brand className="shop-name">HUONGTX</Navbar.Brand>
               </LinkContainer>
               <SearchBox />
               <Nav className="right">
@@ -129,7 +130,7 @@ function App() {
                   </Link>
                 )}
                 {userInfo && userInfo.isAdmin && (
-                  <NavDropdown title="Admin" id="admin-nav-dropdown">
+                  <NavDropdown title="Menu" id="admin-nav-dropdown">
                     <LinkContainer to="/admin/dashboard">
                       <NavDropdown.Item>Dashboard</NavDropdown.Item>
                     </LinkContainer>
@@ -151,17 +152,18 @@ function App() {
         <div
           className={
             sidebarIsOpen
-              ? 'active-nav side-navbar d-flex justify-content-between flex-warp flex-column'
-              : 'side-navbar d-flex justify-content-between flex-warp flex-column'
+              ? 'active-nav side-navbar d-flex justify-content-between flex-warp flex-column nav-cate'
+              : 'side-navbar d-flex justify-content-between flex-warp flex-column nav-cate'
           }
         >
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
-              <strong>Categories</strong>
+              <strong className="category">Categories</strong>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
                 <Link
+                  className="nav-link"
                   to={`/search?category=${category}`}
                   onClick={() => setSidebarIsOpen(false)}
                 >
@@ -267,6 +269,9 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </BrowserRouter>
   );

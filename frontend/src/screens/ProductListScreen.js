@@ -193,10 +193,14 @@ export default function ProductListScreen() {
               ))}
             </tbody>
           </table>
-          <div>
+          <div className="text-center">
             {[...Array(pages).keys()].map((x) => (
               <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                className={
+                  x + 1 === Number(page)
+                    ? 'btn text-bold btn-success rounded-circle m-2'
+                    : 'btn rounded-circle m-2 border'
+                }
                 key={x + 1}
                 to={`/admin/products?page=${x + 1}`}
               >

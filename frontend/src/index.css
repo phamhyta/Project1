@@ -132,3 +132,24 @@ header a {
 button.thumbnail {
   padding: 0;
 }
+.shop-name {
+  margin-left: 20px;
+}
+.category {
+    margin: 20px;
+    border-bottom: 2px solid;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.nav-cate {
+  background: #0f442c;
+}
+.nav-link {
+  padding: 5px 20px;
+  color: white;
+}
+
+.text-header {
+  background: #198754;
+  color: white;
+}
