@@ -265,7 +265,7 @@ export default function SearchScreen() {
                 ))}
               </Row>
 
-              <div>
+              <div className="text-center">
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
                     key={x + 1}
@@ -273,8 +273,11 @@ export default function SearchScreen() {
                     to={getFilterUrl({ page: x + 1 })}
                   >
                     <Button
-                      className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant="light"
+                      className={
+                        Number(page) === x + 1
+                          ? 'btn text-bold btn-success rounded-circle m-2'
+                          : 'btn rounded-circle m-2 border btn-light'
+                      }
                     >
                       {x + 1}
                     </Button>
