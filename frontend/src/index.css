@@ -153,3 +153,55 @@ button.thumbnail {
   background: #198754;
   color: white;
 }
+
+.chat-button {
+  bottom: 100px;
+  right: 30px;
+  position: fixed;
+  z-index: 20;
+}
+
+.chat {
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+}
+
+.messenge-admin {
+  margin-right: 10px;
+  background-color: #87d068
+}
+
+.messenge-user {
+  margin-right: 10px;
+  background-color: #1d470c;
+}
+
+.group-messenge {
+  border: none;
+}
+
+.list-mess {
+  margin: 10px;
+  border: #198754 solid 1px;
+  border-radius: 10px;
+  padding: 4px;
+  max-width: 250px;
+  padding-left: 10px;
+}
+
+.ui-messages {
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.admin-mess {
+  margin-left: 20%;
+  max-width: 400px;
+  margin-bottom: 100px;
+}
+
+.mess-active {
+  background-color: #198754;
+  color: white;
+}
