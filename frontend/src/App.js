@@ -35,7 +35,7 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
-
+import AdminPage from './screens/AdminPage';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { fullBox, cart, userInfo } = state;
@@ -142,6 +142,9 @@ function App() {
                     </LinkContainer>
                     <LinkContainer to="/admin/users">
                       <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin">
+                      <NavDropdown.Item>Chat with user</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
                 )}
@@ -266,6 +269,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+              <Route path="/admin" element={<AdminPage />}></Route>
             </Routes>
           </Container>
         </main>
