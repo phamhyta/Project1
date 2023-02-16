@@ -94,7 +94,7 @@ const OrderScreen = () => {
       try {
         dispatch({ type: 'PAY_REQUEST' });
         const { data } = await axios.put(
-          `api/orders/${order._id}/pay`,
+          `/api/orders/${order._id}/pay`,
           details,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },

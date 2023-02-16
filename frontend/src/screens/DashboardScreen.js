@@ -5,9 +5,10 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import { ReactComponent as Balloon } from '../assets/svg/balloon.svg';
+import { ReactComponent as Leaves } from '../assets/svg/leaves.svg';
+import { ReactComponent as Square } from '../assets/svg/square.svg';
+import { ReactComponent as Frame } from '../assets/svg/frame.svg';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -51,86 +52,100 @@ export default function DashboardScreen() {
   }, [userInfo]);
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="dashboard">
       {loading ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <Row>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    {summary.users && summary.users[0]
-                      ? summary.users[0].numUsers
-                      : 0}
-                  </Card.Title>
-                  <Card.Text> Users</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].numOrders
-                      : 0}
-                  </Card.Title>
-                  <Card.Text> Orders</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    $
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].totalSales.toFixed(2)
-                      : 0}
-                  </Card.Title>
-                  <Card.Text> Orders</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          <div className="my-3">
-            <h2>Sales</h2>
-            {summary.dailyOrders.length === 0 ? (
-              <MessageBox>No Sale</MessageBox>
-            ) : (
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="AreaChart"
-                loader={<div>Loading Chart...</div>}
-                data={[
-                  ['Date', 'Sales'],
-                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
-                ]}
-              ></Chart>
-            )}
+          <div className="font-bold text-2xl pt-8 pl-8">Dashboard</div>
+          <div className="w-11/12 flex first-content m-8">
+            <div className="w-1/4 justify-center flex items-center">
+              <div className="z-20">
+                <div className="font-medium text-2xl color-green">Hello Marry </div>
+                <div className="font-light text-sm">Have a nice day to work!</div>
+              </div>
+            </div>
+            <div className="w-1/4 bg-white my-6 flex rounded-md mr-6">
+              <div className="w-1/3 mt-4">
+                <Leaves className="absolute mt-6 ml-3" />
+                <Balloon />
+              </div>
+              <div className="w-1/2 py-3">
+                <div className="font-normal">Users</div>
+                <div className="font-bold text-xl">
+                  {summary.users && summary.users[0]
+                  ? summary.users[0].numUsers
+                  : 0}
+                </div>
+              </div>
+            </div>
+            <div className="w-1/4 bg-white my-6 flex rounded-md mr-6">
+              <div className="w-1/3 mt-4">
+                <Square className="absolute mt-6 ml-3" />
+                <Balloon />
+              </div>
+              <div className="w-1/2 py-3">
+                <div className="font-normal">Orders</div>
+                <div className="font-bold text-xl">
+                  {summary.orders && summary.users[0]
+                    ? summary.orders[0].numOrders
+                    : 0}
+                </div>
+              </div>
+            </div>
+            <div className="w-1/4 bg-white my-6 flex rounded-md mr-6">
+              <div className="w-1/3 mt-4">
+                <Frame className="absolute mt-6 ml-3" />
+                <Balloon />
+              </div>
+              <div className="w-1/2 py-3">
+                <div className="font-normal">Orders</div>
+                <div className="font-bold text-xl">
+                  $
+                  {summary.orders && summary.users[0]
+                    ? summary.orders[0].totalSales.toFixed(2)
+                    : 0}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="my-3">
-            <h2>Categories</h2>
-            {summary.productCategories.length === 0 ? (
-              <MessageBox>No Category</MessageBox>
-            ) : (
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="PieChart"
-                loader={<div>Loading Chart...</div>}
-                data={[
-                  ['Category', 'Products'],
-                  ...summary.productCategories.map((x) => [x._id, x.count]),
-                ]}
-              ></Chart>
-            )}
+          <div className="chart">
+            <div className="my-3 chart-left">
+              <h2 className="font-bold text-2xl pt-8 pl-8">Sales</h2>
+              {summary.dailyOrders.length === 0 ? (
+                <MessageBox>No Sale</MessageBox>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="AreaChart"
+                  loader={<div>Loading Chart...</div>}
+                  data={[
+                    ['Date', 'Sales'],
+                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                  ]}
+                ></Chart>
+              )}
+            </div>
+            <div className="my-3 chart-right">
+              <h2 className="font-bold text-2xl pt-8 pl-8">Categories</h2>
+              {summary.productCategories.length === 0 ? (
+                <MessageBox>No Category</MessageBox>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="PieChart"
+                  loader={<div>Loading Chart...</div>}
+                  data={[
+                    ['Category', 'Products'],
+                    ...summary.productCategories.map((x) => [x._id, x.count]),
+                  ]}
+                ></Chart>
+              )}
+            </div>
           </div>
         </>
       )}

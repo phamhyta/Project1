@@ -162,7 +162,7 @@ function HoneScreen() {
           </Card>
         )}
       </div>
-      <h1 className="text-center border my-4 py-2 text-header">
+      <h1 className="text-center border my-4 py-2 text-header font-bold text-3xl">
         Feature Products
       </h1>
       <div className="products">
@@ -187,7 +187,7 @@ function HoneScreen() {
           <div></div>
         </div>
         <div className="pb-5">
-          <h1 className="text-center border my-4 py-2 text-header">News</h1>
+          <h1 className="text-center border my-4 py-2 text-header font-bold text-3xl">News</h1>
           <div>
             <News />
           </div>

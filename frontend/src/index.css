@@ -1,3 +1,5 @@
+@import url("https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css");
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -204,4 +206,79 @@ button.thumbnail {
 .mess-active {
   background-color: #198754;
   color: white;
+}
+
+.cart-number {
+  position: absolute;
+  margin-left: 20px;
+}
+
+.chart {
+  width: 100%;
+  display: flex;
+}
+
+.chart-left {
+  width: 60%;
+}
+
+.chart-right {
+  width: 40%;
+}
+
+.dashboard {
+  font-family: "Roboto";
+  font-style: normal;
+  line-height: 28px;
+}
+
+.dashboard .first-content {
+  background: #dbefd5;
+  box-shadow: 0px 14.625px 80.4375px -21.9375px rgba(43, 37, 37, 0.12);
+  border-radius: 8px;
+  max-height: 150px;
+}
+
+.color-green {
+  color: #34741a !important;
+}
+
+.balloon {
+  width: 120px;
+  height: 120px;
+  background: rgba(243, 235, 215, 0.5);
+}
+
+.high {
+  background: #fbe2e3;
+  color: #f14a51;
+}
+
+.good {
+  background: #e2f3df;
+  color: #3fae2a;
+}
+
+.base {
+  background: #fff2c4;
+  color: #f3af00;
+}
+
+.alert-text {
+  background: #f7f7f7;
+  color: #e53e44;
+}
+
+.warning-text {
+  background: #f7f7f7;
+  color: #dea000;
+}
+
+.alert-history {
+  background: #e6f0e4;
+  border: 1px solid #cfe7cb;
+}
+
+.alert-history .content {
+  border: 1px solid #b3daab;
 }
