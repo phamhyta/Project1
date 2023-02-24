@@ -193,6 +193,7 @@ button.thumbnail {
 }
 
 .ui-messages {
+  /* margin-top: 40px; */
   overflow-y: scroll;
   height: 300px;
 }

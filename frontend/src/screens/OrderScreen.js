@@ -1,5 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+  useRef,
+} from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,6 +20,8 @@ import { getError } from '../utils';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -49,8 +57,12 @@ const reducer = (state, action) => {
 };
 
 const OrderScreen = () => {
+  let reviewsRef = useRef();
   const { state } = useContext(Store);
   const { userInfo } = state;
+  const [rating, setRating] = useState(0);
+  const [idProduct, setIdProduct] = useState(0);
+  const [comment, setComment] = useState('');
   const params = useParams();
   const { id: orderId } = params;
   const navigate = useNavigate();
@@ -63,12 +75,15 @@ const OrderScreen = () => {
       loadingPay,
       loadingDeliver,
       successDeliver,
+      product,
+      loadingCreateReview,
     },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
     order: {},
     error: '',
+    product: [],
     successPay: false,
     loadingPay: false,
   });
@@ -111,6 +126,39 @@ const OrderScreen = () => {
   function onError(err) {
     toast.error(getError(err));
   }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (!comment || !rating) {
+      toast.error('Please enter comment and rating');
+      return;
+    }
+    try {
+      const { data } = await axios.post(
+        `/api/products/${idProduct}/reviews`,
+        { rating, comment, name: userInfo.name },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({
+        type: 'CREATE_SUCCESS',
+      });
+      toast.success('Review submitted successfully');
+      // product.reviews.unshift(data.review);
+      product.numReviews = data.numReviews;
+      product.rating = data.rating;
+      dispatch({ type: 'REFRESH_PRODUCT', payload: product });
+      window.scrollTo({
+        behavior: 'smooth',
+        // top: reviewsRef.current.offsetTop,
+      });
+    } catch (error) {
+      toast.error(getError(error));
+      dispatch({ type: 'CREATE_FAIL' });
+    }
+  };
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -261,6 +309,68 @@ const OrderScreen = () => {
                       </Col>
                       <Col sm={3}>${item.price}</Col>
                     </Row>
+                    {order.isDelivered && (
+                      <div className="my-3">
+                        {userInfo ? (
+                          <form onSubmit={submitHandler}>
+                            <h2>Write a customer review</h2>
+                            <Form.Group className="mb-3" controlId="rating">
+                              <Form.Label>Rating</Form.Label>
+                              <Form.Select
+                                aria-label="Rating"
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                              >
+                                <option value="">Select...</option>
+                                <option value="1">1- Poor</option>
+                                <option value="2">2- Fair</option>
+                                <option value="3">3- Good</option>
+                                <option value="4">4- Very good</option>
+                                <option value="5">5- Excelent</option>
+                              </Form.Select>
+                            </Form.Group>
+                            <FloatingLabel
+                              controlId="floatingTextarea"
+                              label="Comments"
+                              className="mb-3"
+                            >
+                              <Form.Control
+                                as="textarea"
+                                placeholder="Leave a comment here"
+                                value={comment}
+                                onChange={(e) => {
+                                  setComment(e.target.value);
+                                  setIdProduct(item._id);
+                                }}
+                              />
+                            </FloatingLabel>
+
+                            <div className="mb-3">
+                              <Button
+                                disabled={loadingCreateReview}
+                                type="submit"
+                              >
+                                Submit
+                              </Button>
+                              {loadingCreateReview && <LoadingBox></LoadingBox>}
+                            </div>
+                          </form>
+                        ) : (
+                          <MessageBox>
+                            Please{' '}
+                            <Link
+                              to={`/signin?redirect=/product/${product.slug}`}
+                            >
+                              Sign In
+                            </Link>{' '}
+                            to write a review
+                          </MessageBox>
+                        )}
+                        <Link variant="light" to={`/product/${item.slug}`}>
+                          Show all comment
+                        </Link>
+                      </div>
+                    )}
                   </ListGroup.Item>
                 ))}
               </ListGroup>
