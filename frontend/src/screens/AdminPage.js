@@ -1,26 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
-import socketIOClient from "socket.io-client";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
-import Alert from "react-bootstrap/Alert";
-import Badge from "react-bootstrap/Badge";
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
+import React, { useEffect, useRef, useState } from 'react';
+import socketIOClient from 'socket.io-client';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Alert from 'react-bootstrap/Alert';
+import Badge from 'react-bootstrap/Badge';
+import FormControl from 'react-bootstrap/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 
 const ENDPOINT =
-  window.location.host.indexOf("localhost") >= 0
-    ? "http://127.0.0.1:4000"
+  window.location.host.indexOf('localhost') >= 0
+    ? 'http://127.0.0.1:4000'
     : window.location.host;
 
 export default function AdminPage() {
   const [selectedUser, setSelectedUser] = useState({});
   const [socket, setSocket] = useState(null);
   const uiMessagesRef = useRef(null);
-  const [messageBody, setMessageBody] = useState("");
+  const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -28,11 +28,11 @@ export default function AdminPage() {
       uiMessagesRef.current.scrollBy({
         top: uiMessagesRef.current.scrollHeight,
         left: 0,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
     if (socket) {
-      socket.on("message", (data) => {
+      socket.on('message', (data) => {
         if (selectedUser.name === data.from) {
           setMessages([...messages, data]);
         } else {
@@ -47,7 +47,7 @@ export default function AdminPage() {
         }
       });
 
-      socket.on("updateUser", (updatedUser) => {
+      socket.on('updateUser', (updatedUser) => {
         const existUser = users.find((user) => user.name === updatedUser.name);
         if (existUser) {
           setUsers(
@@ -59,18 +59,18 @@ export default function AdminPage() {
           setUsers([...users, updatedUser]);
         }
       });
-      socket.on("listUsers", (updatedUsers) => {
+      socket.on('listUsers', (updatedUsers) => {
         setUsers(updatedUsers);
       });
 
-      socket.on("selectUser", (user) => {
+      socket.on('selectUser', (user) => {
         setMessages(user.messages);
       });
     } else {
       const sk = socketIOClient(ENDPOINT);
       setSocket(sk);
-      sk.emit("onLogin", {
-        name: "Admin",
+      sk.emit('onLogin', {
+        name: 'Admin',
       });
     }
   }, [messages, selectedUser, socket, users]);
@@ -85,67 +85,67 @@ export default function AdminPage() {
         )
       );
     }
-    socket.emit("onUserSelected", user);
+    socket.emit('onUserSelected', user);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
-      alert("Error. Please type message.");
+      alert('Error. Please type message.');
     } else {
       setMessages([
         ...messages,
-        { body: messageBody, from: "Admin", to: selectedUser.name },
+        { body: messageBody, from: 'Admin', to: selectedUser.name },
       ]);
       setTimeout(() => {
-        socket.emit("onMessage", {
+        socket.emit('onMessage', {
           body: messageBody,
-          from: "Admin",
+          from: 'Admin',
           to: selectedUser.name,
         });
       }, 1000);
-      setMessageBody("");
+      setMessageBody('');
     }
   };
 
   return (
     <Row>
       <Col sm={3}>
-        {users.filter((x) => x.name !== "Admin").length === 0 && (
+        {users.filter((x) => x.name !== 'Admin').length === 0 && (
           <Alert variant="info">No User Found</Alert>
         )}
         <ListGroup>
           {users
-            .filter((x) => x.name !== "Admin")
+            .filter((x) => x.name !== 'Admin')
             .map((user) => (
               <ListGroup.Item
                 action
                 key={user.name}
-                variant={user.name === selectedUser.name ? "info" : ""}
+                variant={user.name === selectedUser.name ? 'info' : ''}
                 onClick={() => selectUser(user)}
               >
                 <Badge
                   bg={
                     selectedUser.name === user.name
                       ? user.online
-                        ? "primary"
-                        : "secondary"
+                        ? 'primary'
+                        : 'secondary'
                       : user.unread
-                      ? "danger"
+                      ? 'danger'
                       : user.online
-                      ? "primary"
-                      : "secondary"
+                      ? 'primary'
+                      : 'secondary'
                   }
                 >
                   {selectedUser.name === user.name
                     ? user.online
-                      ? "Online"
-                      : "Offline"
+                      ? 'Online'
+                      : 'Offline'
                     : user.unread
-                    ? "New"
+                    ? 'New'
                     : user.online
-                    ? "Online"
-                    : "Offline"}
+                    ? 'Online'
+                    : 'Offline'}
                 </Badge>
                 &nbsp;
                 {user.name}
@@ -159,15 +159,34 @@ export default function AdminPage() {
             <Alert variant="info">Select a user to start chat</Alert>
           ) : (
             <div className="admin-mess">
-              <h2>Chat with {selectedUser.name}</h2>
+              <Col>
+                <strong>Chat with {selectedUser.name}</strong>
+              </Col>
+              {/* <h2></h2> */}
               <ListGroup className="ui-messages" ref={uiMessagesRef}>
                 {messages.length === 0 && (
                   <ListGroup.Item>No message</ListGroup.Item>
                 )}
                 {messages.map((msg, index) => (
                   <ListGroup.Item className="group-messenge" key={index}>
-                    <Avatar className={msg.from === "Admin" ? "messenge-admin" : "messenge-user"} icon={<UserOutlined />} /><strong>{`${msg.from} `}</strong> 
-                    <div className= {msg.from === "Admin" ? "list-mess mess-active" : "list-mess"}>{msg.body}</div>
+                    <Avatar
+                      className={
+                        msg.from === 'Admin'
+                          ? 'messenge-admin'
+                          : 'messenge-user'
+                      }
+                      icon={<UserOutlined />}
+                    />
+                    <strong>{`${msg.from} `}</strong>
+                    <div
+                      className={
+                        msg.from === 'Admin'
+                          ? 'list-mess mess-active'
+                          : 'list-mess'
+                      }
+                    >
+                      {msg.body}
+                    </div>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
